@@ -13,8 +13,8 @@ java -jar $APKTOOL_PATH d $APK_PATH -o $DECOMPILED_APK_PATH -f
 
 SO_FILE="${DECOMPILED_APK_PATH}/lib/x86_64/libflutter.so"
 
-SSL_CLIENT_ADDRESS=$(strings -a -t x libflutter_old.so | grep -E "ssl_client|ssl_server" | head -1 | awk -F' ' '{print $1}')
-SSL_SERVER_ADDRESS=$(strings -a -t x libflutter_old.so | grep -E "ssl_client|ssl_server" | tail -1 | awk -F' ' '{print $1}')
+SSL_CLIENT_ADDRESS=$(strings -a -t x ${SO_FILE} | grep -E "ssl_client" | awk -F' ' '{print $1}')
+SSL_SERVER_ADDRESS=$(strings -a -t x ${SO_FILE} | grep -E "ssl_server" | awk -F' ' '{print $1}')
 
 DISSASEMBLY_FILE_PATH="/tmp/disassembly.txt"
 
