@@ -66,6 +66,6 @@ unxz -f frida-server.xz
 adb root
 adb push frida-server /data/local/tmp/
 adb shell "chmod 755 /data/local/tmp/frida-server"
-adb shell "/data/local/tmp/frida-server &"
+adb shell '/data/local/tmp/frida-server > /dev/null 2>&1 & echo $!'
 
 frida -U -f $APP_PACKAGE_NAME -l script.js
