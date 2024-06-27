@@ -61,8 +61,8 @@ function disable_certificate_validation(){
 setTimeout(disable_certificate_validation, 1000)
 EOF
 
-curl -L -o frida-server.xz https://github.com/frida/frida/releases/download/16.3.3/frida-server-16.3.3-linux-x86_64.xz
-unxz frida-server.xz
+curl -L -o frida-server.xz https://github.com/frida/frida/releases/download/16.3.3/frida-server-16.3.3-android-x86_64.xz
+unxz -f frida-server.xz && mv frida-server-16.3.3-android-x86_64.xz frida-server
 adb root
 adb push frida-server /data/local/tmp/
 adb shell "chmod 755 /data/local/tmp/frida-server"
