@@ -31,7 +31,7 @@ echo ${ssl_offset_hex} $ssl_function_start_offset
 ssl_function_start_address_decimal=$(($((ssl_offset_hex))+$((ssl_function_start_offset))))
 ssl_function_start_address=$(printf "0x%x\n" $ssl_function_start_address_decimal)
 
-jni_onload_address=0x$(objdump -T libflutter_old.so | tail -n 3 | awk -F' ' '{print $1}')
+jni_onload_address=0x$(objdump -T ${SO_FILE} | tail -n 3 | awk -F' ' '{print $1}')
 
 ssl_function_offset_decimal=$(($((ssl_function_start_address))-$((jni_onload_address))))
 ssl_function_offset=$(printf "0x%x\n" $ssl_function_offset_decimal)
@@ -62,7 +62,7 @@ setTimeout(disable_certificate_validation, 1000)
 EOF
 
 curl -L -o frida-server.xz https://github.com/frida/frida/releases/download/16.3.3/frida-server-16.3.3-android-x86_64.xz
-unxz -f frida-server.xz && mv frida-server-16.3.3-android-x86_64.xz frida-server
+unxz -f frida-server.xz
 adb root
 adb push frida-server /data/local/tmp/
 adb shell "chmod 755 /data/local/tmp/frida-server"
