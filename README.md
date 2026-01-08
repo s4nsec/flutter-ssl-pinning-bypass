@@ -1,9 +1,10 @@
 # Flutter APK SSL Certificate Validation Disabler
 
-This script disables SSL certificate validation in a Flutter application by modifying the APK file and injecting a Frida hook. This can be useful for testing purposes where you need to bypass SSL pinning.
+This tool disables SSL certificate validation in a Flutter application by analyzing the APK file and injecting a Frida hook. This can be useful for testing purposes where you need to bypass SSL pinning.
 
 ## Prerequisites
 
+- `python3`: Python 3.x interpreter.
 - `apktool`: Tool to decompile and recompile APK files.
 - `strings`: Command to extract printable strings from a binary.
 - `objdump`: Command to display information from object files.
@@ -21,14 +22,13 @@ This script disables SSL certificate validation in a Flutter application by modi
 ### Example
 
 ```sh
-./flutter_ssl_pinning_bypass.sh /path/to/app.apk /path/to/apktool.jar com.example.app
+python3 flutter_ssl_pinning_bypass.py /path/to/app.apk /path/to/apktool.jar com.example.app
 ```
 
 ## Script Details
 
 1. **Setup and Variables:**
-    - The script sets the options `-e` (exit on error) and `-x` (print commands).
-    - Variables are initialized for paths and filenames.
+    - Parses command-line arguments and initializes paths.
 
 2. **Decompile the APK:**
     - Uses `apktool` to decompile the APK to a temporary directory.
