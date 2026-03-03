@@ -28,32 +28,37 @@ python3 flutter_ssl_pinning_bypass.py /path/to/app.apk /path/to/apktool.jar com.
 ## Script Details
 
 1. **Setup and Variables:**
-    - Parses command-line arguments and initializes paths.
+   - Parses command-line arguments and initializes paths.
 
 2. **Decompile the APK:**
-    - Uses `apktool` to decompile the APK to a temporary directory.
+   - Uses `apktool` to decompile the APK to a temporary directory.
 
 3. **Find SSL Client and Server Addresses:**
-    - Extracts SSL client and server addresses from the `libflutter.so` file using `strings`.
+   - Extracts SSL client and server addresses from the `libflutter.so` file using `strings`.
 
 4. **Disassemble the Shared Library:**
-    - Disassembles the `libflutter.so` file to a text file.
+   - Disassembles the `libflutter.so` file to a text file.
 
 5. **Calculate SSL Function Offset:**
-    - Extracts the offset of the SSL function start address and converts it to a hexadecimal format.
-    - Calculates the offset between the SSL function and the `JNI_OnLoad` function.
+   - Extracts the offset of the SSL function start address and converts it to a hexadecimal format.
+   - Calculates the offset between the SSL function and the `JNI_OnLoad` function.
 
 6. **Generate Frida Script:**
-    - Creates a Frida script (`script.js`) to hook and disable SSL certificate validation.
+   - Creates a Frida script (`script.js`) to hook and disable SSL certificate validation.
 
 7. **Download and Setup Frida Server:**
-    - Downloads the Frida server for Android and sets it up on the device.
+   - Downloads the Frida server for Android and sets it up on the device.
 
 8. **Run Frida with the Script:**
-    - Uses Frida to inject the script into the specified application.
+   - Uses Frida to inject the script into the specified application.
 
 ## Notes
 
 - Ensure your Android device is connected and ADB is set up properly.
 - Running this script requires root access on the Android device.
 - This script is intended for testing and educational purposes only. Use responsibly.
+
+## References
+
+- https://blog.nviso.eu/2019/08/13/intercepting-traffic-from-android-flutter-applications/
+- https://blog.nviso.eu/2020/05/20/intercepting-flutter-traffic-on-android-x64/
